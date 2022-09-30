@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.cryptocoins.R
@@ -55,7 +56,8 @@ class CoinListFragment : Fragment(R.layout.fragment_coin_list) {
             viewModel.performCoinsRequest(currency)
         }
         coinListAdapter.setOnItemClickListener { coin ->
-
+            val action = CoinListFragmentDirections.actionCoinListFragmentToCoinInfoFragment(coin.id)
+            findNavController().navigate(action)
         }
         binding.incErrorCoinList.btnToTry.setDebounceClickListener {
             viewModel.performCoinsRequest(currency)

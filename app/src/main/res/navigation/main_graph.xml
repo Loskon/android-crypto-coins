@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/coinListFragment"
         android:name="com.loskon.cryptocoins.app.coinlist.presentation.CoinListFragment"
-        android:label="CoinListFragment" />
+        android:label="CoinListFragment" >
+        <action
+            android:id="@+id/action_coinListFragment_to_coinInfoFragment"
+            app:destination="@id/coinInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coinInfoFragment"
+        android:name="com.loskon.cryptocoins.app.coininfo.presentation.CoinInfoFragment"
+        android:label="CoinInfoFragment" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>
