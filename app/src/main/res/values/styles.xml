@@ -9,4 +9,9 @@
     <style name="MarginSnackbarStyle" parent="Widget.MaterialComponents.Snackbar">
         <item name="android:layout_margin">@dimen/margin_medium</item>
     </style>
+
+    <style name="ToolbarTextAppearance">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
 </resources>

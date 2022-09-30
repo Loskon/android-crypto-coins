@@ -4,4 +4,6 @@
     <string name="error">Случилась какая-то ошибка :(\n Попробуем снова?</string>
     <string name="to_try">Попробовать</string>
     <string name="error_loading">Произошла ошибка при загрузке</string>
+    <string name="description">Описание</string>
+    <string name="categories">Категории</string>
 </resources>
