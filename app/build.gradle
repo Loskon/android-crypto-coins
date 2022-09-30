@@ -18,6 +18,7 @@ android {
         versionCode deps.versions.debugVersionCode.get() as Integer
         versionName deps.versions.debugVersionName.get()
 
+        buildConfigField 'String', 'API_BASE_URL', '"https://api.coingecko.com/api/v3/"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -65,6 +66,8 @@ dependencies {
     kapt deps.moshiCodegen
     // Logs
     implementation deps.timber
+    // DI
+    implementation deps.koin
     // Test
     testImplementation deps.junit4
     androidTestImplementation deps.extJunit
