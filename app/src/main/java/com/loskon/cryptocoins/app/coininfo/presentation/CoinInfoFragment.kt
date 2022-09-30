@@ -45,8 +45,8 @@ class CoinInfoFragment : Fragment(R.layout.fragment_coin_info) {
                     binding.swCoinInfo.isVisible = true
 
                     binding.tbCoinInfo.title = it.coin.name
-                    ImageLoader.load(binding.ivCoinInfo, it.coin.imageUrls.name)
-                    binding.tvCoinInfoDescription.text = it.coin.description.name
+                    ImageLoader.load(binding.ivCoinInfo, it.coin.imageUrl)
+                    binding.tvCoinInfoDescription.text = it.coin.description
                     binding.tvCoinInfoCategories.text = it.coin.categories.joinToString(separator = ", ")
                 }
                 is CoinInfoState.Error -> {

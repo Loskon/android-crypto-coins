@@ -2,7 +2,6 @@ package com.loskon.cryptocoins.data
 
 import com.loskon.cryptocoins.data.api.CoinGeckoApi
 import com.loskon.cryptocoins.data.dto.CoinDto
-import com.loskon.cryptocoins.data.dto.CoinInfoDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -24,14 +23,14 @@ class NetworkDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getCoinAsFlow(id: String, localization: Boolean = false): Flow<CoinInfoDto> {
+    suspend fun getCoinAsFlow(id: String, localization: Boolean = false): Flow<CoinDto> {
         return flow {
             val response = coinGeckoApi.getCoin(id, localization)
 
             if (response.isSuccessful) {
-                emit(response.body() ?: CoinInfoDto())
+                emit(response.body() ?: CoinDto())
             } else {
-                emit(CoinInfoDto())
+                emit(CoinDto())
             }
         }.flowOn(Dispatchers.IO)
     }

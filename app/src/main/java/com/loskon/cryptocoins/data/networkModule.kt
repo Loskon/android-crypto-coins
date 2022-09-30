@@ -2,6 +2,7 @@ package com.loskon.cryptocoins.data
 
 import com.loskon.cryptocoins.BuildConfig
 import com.loskon.cryptocoins.data.api.CoinGeckoApi
+import com.loskon.cryptocoins.data.moshiadapter.CoinGeckoMoshiAdapter
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -30,7 +31,7 @@ private fun provideOkHttp(logging: HttpLoggingInterceptor): OkHttpClient {
 }
 
 private fun provideMoshi(): Moshi {
-    return Moshi.Builder().build()
+    return Moshi.Builder().add(CoinGeckoMoshiAdapter()).build()
 }
 
 private fun provideRetrofit(okHttp: OkHttpClient, moshi: Moshi): Retrofit {

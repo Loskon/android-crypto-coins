@@ -1,7 +1,6 @@
 package com.loskon.cryptocoins.data.api
 
 import com.loskon.cryptocoins.data.dto.CoinDto
-import com.loskon.cryptocoins.data.dto.CoinInfoDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,5 +18,5 @@ interface CoinGeckoApi {
     suspend fun getCoin(
         @Path("id") id: String,
         @Query("localization") localization: Boolean
-    ): Response<CoinInfoDto>
+    ): Response<CoinDto>
 }
