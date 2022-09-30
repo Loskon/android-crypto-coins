@@ -6,5 +6,5 @@ data class CoinModel(
     val name: String = "",
     val imageUrl: String = "",
     val currentPrice: Double = 0.0,
-    val priceChangePercentage: Double? = 0.0
+    val priceChangePercentage: Double = 0.0
 )

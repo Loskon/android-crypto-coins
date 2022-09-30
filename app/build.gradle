@@ -68,6 +68,8 @@ dependencies {
     implementation deps.timber
     // DI
     implementation deps.koin
+    // ImageLoader
+    implementation deps.coil
     // Test
     testImplementation deps.junit4
     androidTestImplementation deps.extJunit

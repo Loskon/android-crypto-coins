@@ -2,6 +2,7 @@ package com.loskon.cryptocoins.app
 
 import android.app.Application
 import com.loskon.cryptocoins.BuildConfig
+import com.loskon.cryptocoins.app.coinlist.coinListModule
 import com.loskon.cryptocoins.data.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -18,7 +19,7 @@ class App : Application() {
     private fun initializeKoin(application: Application) {
         startKoin {
             androidContext(application)
-            modules(listOf(networkModule))
+            modules(listOf(networkModule, coinListModule))
         }
     }
 }

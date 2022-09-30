@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_graph.xml">
+    android:id="@+id/main_graph.xml"
+    app:startDestination="@id/coinListFragment">
 
+    <fragment
+        android:id="@+id/coinListFragment"
+        android:name="com.loskon.cryptocoins.app.coinlist.presentation.CoinListFragment"
+        android:label="CoinListFragment" />
 </navigation>
