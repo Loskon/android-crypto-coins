@@ -10,7 +10,10 @@
         <item name="colorSecondaryVariant">@color/orange</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/smoke</item>
+        <!-- Disable overScrollMode.  -->
+        <item name="android:overScrollMode">never</item>
         <!-- Change snackbar margins.  -->
         <item name="snackbarStyle">@style/MarginSnackbarStyle</item>
     </style>

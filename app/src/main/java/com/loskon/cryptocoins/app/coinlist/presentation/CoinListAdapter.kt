@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.loskon.cryptocoins.R
-import com.loskon.cryptocoins.base.extension.context.getColorKtx
 import com.loskon.cryptocoins.base.extension.view.setDebounceClickListener
 import com.loskon.cryptocoins.base.viewbinding.viewBinding
 import com.loskon.cryptocoins.databinding.ItemCoinBinding
@@ -36,8 +35,8 @@ class CoinListAdapter : RecyclerView.Adapter<CoinListAdapter.CoinListViewHolder>
                 tvCoinName.text = name
                 tvCoinSymbol.text = symbol
                 tvCoinPrice.text = getPriceWithCurrencySign(currentPrice.toString())
-                tvCoinPriceChange.text = "$priceChangePercentage%"
-                tvCoinPriceChange.setTextColor(tvCoinPriceChange.context.getColorKtx(colorId))
+                tvCoinPriceChange.text = getPriceChangePercentageWithSign(priceChangePercentage)
+                tvCoinPriceChange.setTextColor(tvCoinPriceChange.context.getColor(colorId))
                 root.setDebounceClickListener { onItemClick?.invoke(this) }
             }
         }
@@ -58,6 +57,16 @@ class CoinListAdapter : RecyclerView.Adapter<CoinListAdapter.CoinListViewHolder>
             "$ $currentPrice"
         } else {
             "€ $currentPrice"
+        }
+    }
+
+    private fun getPriceChangePercentageWithSign(number: Double): String {
+        return if (number < 0.0) {
+            number.toString().replace("-", "- ").plus("%")
+        } else if (number > 0.0) {
+            "+ $number%"
+        } else {
+            number.toString().plus("%")
         }
     }
 

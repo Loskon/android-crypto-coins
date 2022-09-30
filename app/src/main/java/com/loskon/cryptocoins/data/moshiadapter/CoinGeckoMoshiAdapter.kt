@@ -4,6 +4,7 @@ import com.loskon.cryptocoins.data.dto.CoinDto
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonReader
 
+@Suppress("LongMethod", "ComplexMethod", "NestedBlockDepth", "unused")
 class CoinGeckoMoshiAdapter {
 
     @FromJson

@@ -1,6 +1,8 @@
 package com.loskon.cryptocoins.app.coininfo.presentation
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -29,8 +31,9 @@ class CoinInfoFragment : Fragment(R.layout.fragment_coin_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tbCoinInfo.title = args.name
         installObservers()
-        setupViewListener()
+        setupViewsListeners()
     }
 
     private fun installObservers() {
@@ -44,9 +47,8 @@ class CoinInfoFragment : Fragment(R.layout.fragment_coin_info) {
                     binding.incErrorCoinInfo.root.isVisible = false
                     binding.swCoinInfo.isVisible = true
 
-                    binding.tbCoinInfo.title = it.coin.name
                     ImageLoader.load(binding.ivCoinInfo, it.coin.imageUrl)
-                    binding.tvCoinInfoDescription.text = it.coin.description
+                    binding.tvCoinInfoDescription.text = getFromHtmlText(it.coin.description.replace("\n", "<br/>"))
                     binding.tvCoinInfoCategories.text = it.coin.categories.joinToString(separator = ", ")
                 }
                 is CoinInfoState.Error -> {
@@ -57,7 +59,16 @@ class CoinInfoFragment : Fragment(R.layout.fragment_coin_info) {
         }
     }
 
-    private fun setupViewListener() {
+    @Suppress("DEPRECATION")
+    private fun getFromHtmlText(source: String): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(source, Html.FROM_HTML_MODE_COMPACT).toString()
+        } else {
+            Html.fromHtml(source).toString()
+        }
+    }
+
+    private fun setupViewsListeners() {
         binding.tbCoinInfo.setNavigationOnClickListener {
             findNavController().popBackStack()
         }

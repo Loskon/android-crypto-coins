@@ -61,7 +61,7 @@ class CoinListFragment : Fragment(R.layout.fragment_coin_list) {
             viewModel.performCoinsRequest(currency)
         }
         coinListAdapter.setOnItemClickListener { coin ->
-            val action = CoinListFragmentDirections.actionCoinListFragmentToCoinInfoFragment(coin.id)
+            val action = CoinListFragmentDirections.openCoinInfoFragment(coin.id, coin.name)
             findNavController().navigate(action)
         }
         binding.incErrorCoinList.btnToTry.setDebounceClickListener {
