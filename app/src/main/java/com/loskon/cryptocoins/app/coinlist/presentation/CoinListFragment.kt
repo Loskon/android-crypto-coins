@@ -2,6 +2,7 @@ package com.loskon.cryptocoins.app.coinlist.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
@@ -9,10 +10,11 @@ import com.loskon.cryptocoins.R
 import com.loskon.cryptocoins.base.extension.coroutines.observe
 import com.loskon.cryptocoins.base.extension.view.setDebounceClickListener
 import com.loskon.cryptocoins.base.viewbinding.viewBinding
+import com.loskon.cryptocoins.base.widget.BaseSnackbar
 import com.loskon.cryptocoins.databinding.FragmentCoinListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CoinListFragment: Fragment(R.layout.fragment_coin_list) {
+class CoinListFragment : Fragment(R.layout.fragment_coin_list) {
 
     private val binding by viewBinding(FragmentCoinListBinding::bind)
     private val viewModel by viewModel<CoinListViewModel>()
@@ -61,10 +63,36 @@ class CoinListFragment: Fragment(R.layout.fragment_coin_list) {
     }
 
     private fun installObservers() {
-        viewModel.coinListStateFlow.observe(viewLifecycleOwner) { coins ->
-            coinListAdapter.setCurrency(currency)
-            coinListAdapter.setItems(coins)
+        viewModel.coinListStateFlow.observe(viewLifecycleOwner) {
+            when (it) {
+                is CoinListState.Loading -> {
+                    binding.indicatorCoinList.isVisible = true
+                }
+                is CoinListState.Success -> {
+                    binding.indicatorCoinList.isVisible = false
+                    binding.incErrorCoinList.root.isVisible = false
+
+                    coinListAdapter.setCurrency(currency)
+                    coinListAdapter.setItems(it.coins)
+                }
+                is CoinListState.Failure -> {
+                    binding.indicatorCoinList.isVisible = false
+
+                    if (coinListAdapter.itemCount != 0) {
+                        showErrorMessageSnackbar()
+                    } else {
+                        binding.incErrorCoinList.root.isVisible = true
+                    }
+                }
+            }
         }
+    }
+
+    private fun showErrorMessageSnackbar() {
+        BaseSnackbar().create {
+            make(binding.root, getString(R.string.error_loading))
+            setBackgroundTintList(requireContext().getColor(R.color.red))
+        }.show()
     }
 
     companion object {

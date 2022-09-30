@@ -3,4 +3,5 @@
     <string name="list_of_crypto">Список криптовалют</string>
     <string name="error">Случилась какая-то ошибка :(\n Попробуем снова?</string>
     <string name="to_try">Попробовать</string>
+    <string name="error_loading">Произошла ошибка при загрузке</string>
 </resources>
