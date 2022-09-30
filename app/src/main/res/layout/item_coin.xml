@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_coin"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/tv_coin_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:ellipsize="end"
+        android:fontFamily="@font/plus_jakarta_sans_medium"
+        android:maxLines="1"
+        android:textColor="@color/dark_gray"
+        android:textSize="@dimen/text_size_medium"
+        app:layout_constraintEnd_toStartOf="@+id/tv_coin_price"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_coin"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Bitcoin" />
+
+    <TextView
+        android:id="@+id/tv_coin_symbol"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:ellipsize="end"
+        android:fontFamily="@font/plus_jakarta_sans_regular"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:textColor="@color/light_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_coin_price_change"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_coin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coin_name"
+        app:layout_goneMarginBottom="@dimen/margin_small"
+        tools:ignore="TextContrastCheck"
+        tools:text="BTC" />
+
+    <TextView
+        android:id="@+id/tv_coin_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:ellipsize="end"
+        android:fontFamily="@font/plus_jakarta_sans_semi_bold"
+        android:gravity="end"
+        android:maxLines="1"
+        android:textColor="@color/dark_gray"
+        android:textSize="@dimen/text_size_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_coin_name"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="$ 28,600.74" />
+
+    <TextView
+        android:id="@+id/tv_coin_price_change"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:ellipsize="end"
+        android:fontFamily="@font/plus_jakarta_sans_regular"
+        android:gravity="end"
+        android:maxLines="1"
+        android:textColor="@color/light_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_coin_symbol"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coin_price"
+        tools:ignore="TextContrastCheck"
+        tools:text="+ 4.05%" />
+</androidx.constraintlayout.widget.ConstraintLayout>
