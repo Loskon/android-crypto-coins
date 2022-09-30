@@ -48,14 +48,14 @@ android {
 }
 
 dependencies {
-
-// Android
+    // Android
     implementation deps.appcompat
     implementation deps.material
     implementation deps.constraintlayout
     implementation deps.recyclerview
     implementation deps.activity
     implementation deps.fragment
+    implementation deps.swiperefreshlayout
     implementation deps.bundles.lifecycle
     implementation deps.bundles.navigation
     // Kotlin

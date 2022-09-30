@@ -32,6 +32,7 @@ class CoinListFragment : Fragment(R.layout.fragment_coin_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.swlCoinList.setColorSchemeColors(requireContext().getColor(R.color.black_77))
         configureRecyclerView()
         setupViewsListener()
         installObservers()
@@ -53,6 +54,10 @@ class CoinListFragment : Fragment(R.layout.fragment_coin_list) {
         }
         binding.chipEur.setOnClickListener {
             currency = EURO_CURRENCY
+            viewModel.performCoinsRequest(currency)
+        }
+        binding.swlCoinList.setOnRefreshListener {
+            binding.swlCoinList.isRefreshing = false
             viewModel.performCoinsRequest(currency)
         }
         coinListAdapter.setOnItemClickListener { coin ->
