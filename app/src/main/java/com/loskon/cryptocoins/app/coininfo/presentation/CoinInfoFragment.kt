@@ -13,7 +13,6 @@ import com.loskon.cryptocoins.base.viewbinding.viewBinding
 import com.loskon.cryptocoins.databinding.FragmentCoinInfoBinding
 import com.loskon.cryptocoins.utils.ImageLoader
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class CoinInfoFragment : Fragment(R.layout.fragment_coin_info) {
 
@@ -36,12 +35,25 @@ class CoinInfoFragment : Fragment(R.layout.fragment_coin_info) {
 
     private fun installObservers() {
         viewModel.coinInfoFlow.observe(viewLifecycleOwner) {
-            Timber.d(it.toString())
-            binding.swCoinInfo.isVisible = true
-            binding.tbCoinInfo.title = it.name
-            ImageLoader.load(binding.ivCoinInfo, it.imageUrls.name)
-            binding.tvCoinInfoDescription.text = it.description.name
-            binding.tvCoinInfoCategories.text = it.categories.joinToString(separator = ", ")
+            when (it) {
+                is CoinInfoState.Loading -> {
+                    binding.indicatorCoinInfo.isVisible = true
+                }
+                is CoinInfoState.Success -> {
+                    binding.indicatorCoinInfo.isVisible = false
+                    binding.incErrorCoinInfo.root.isVisible = false
+                    binding.swCoinInfo.isVisible = true
+
+                    binding.tbCoinInfo.title = it.coin.name
+                    ImageLoader.load(binding.ivCoinInfo, it.coin.imageUrls.name)
+                    binding.tvCoinInfoDescription.text = it.coin.description.name
+                    binding.tvCoinInfoCategories.text = it.coin.categories.joinToString(separator = ", ")
+                }
+                is CoinInfoState.Error -> {
+                    binding.indicatorCoinInfo.isVisible = false
+                    binding.incErrorCoinInfo.root.isVisible = true
+                }
+            }
         }
     }
 
