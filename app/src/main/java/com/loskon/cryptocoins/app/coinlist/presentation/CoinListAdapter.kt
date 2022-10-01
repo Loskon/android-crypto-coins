@@ -9,8 +9,10 @@ import com.loskon.cryptocoins.base.viewbinding.viewBinding
 import com.loskon.cryptocoins.databinding.ItemCoinBinding
 import com.loskon.cryptocoins.domain.CoinModel
 import com.loskon.cryptocoins.utils.ImageLoader
+import java.math.BigDecimal
+import java.math.RoundingMode
 
-@SuppressLint("NotifyDataSetChanged, SetTextI18n")
+@SuppressLint("NotifyDataSetChanged")
 class CoinListAdapter : RecyclerView.Adapter<CoinListAdapter.CoinListViewHolder>() {
 
     private var list: List<CoinModel> = emptyList()
@@ -34,7 +36,7 @@ class CoinListAdapter : RecyclerView.Adapter<CoinListAdapter.CoinListViewHolder>
                 ImageLoader.load(ivCoin, imageUrl)
                 tvCoinName.text = name
                 tvCoinSymbol.text = symbol
-                tvCoinPrice.text = getPriceWithCurrencySign(currentPrice.toString())
+                tvCoinPrice.text = getPriceWithCurrencySign(currentPrice)
                 tvCoinPriceChange.text = getPriceChangePercentageWithSign(priceChangePercentage)
                 tvCoinPriceChange.setTextColor(tvCoinPriceChange.context.getColor(colorId))
                 root.setDebounceClickListener { onItemClick?.invoke(this) }
@@ -52,21 +54,23 @@ class CoinListAdapter : RecyclerView.Adapter<CoinListAdapter.CoinListViewHolder>
         }
     }
 
-    private fun getPriceWithCurrencySign(currentPrice: String): String {
+    private fun getPriceWithCurrencySign(number: Double): String {
         return if (currency == CoinListFragment.DOLLAR_CURRENCY) {
-            "$ $currentPrice"
+            "$ $number"
         } else {
-            "€ $currentPrice"
+            "€ $number"
         }
     }
 
     private fun getPriceChangePercentageWithSign(number: Double): String {
-        return if (number < 0.0) {
-            number.toString().replace("-", "- ").plus("%")
-        } else if (number > 0.0) {
-            "+ $number%"
+        val decimal = BigDecimal(number).setScale(2, RoundingMode.HALF_UP)
+
+        return if (decimal < BigDecimal.ZERO) {
+            decimal.toString().replace("-", "- ").plus("%")
+        } else if (decimal > BigDecimal.ZERO) {
+            "+ $decimal%"
         } else {
-            number.toString().plus("%")
+            decimal.toString().plus("%")
         }
     }
 

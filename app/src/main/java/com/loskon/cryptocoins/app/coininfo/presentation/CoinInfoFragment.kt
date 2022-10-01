@@ -32,11 +32,11 @@ class CoinInfoFragment : Fragment(R.layout.fragment_coin_info) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.tbCoinInfo.title = args.name
-        installObservers()
+        installObserver()
         setupViewsListeners()
     }
 
-    private fun installObservers() {
+    private fun installObserver() {
         viewModel.coinInfoFlow.observe(viewLifecycleOwner) {
             when (it) {
                 is CoinInfoState.Loading -> {

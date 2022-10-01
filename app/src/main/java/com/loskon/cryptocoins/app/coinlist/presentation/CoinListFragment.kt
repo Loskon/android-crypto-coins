@@ -35,7 +35,7 @@ class CoinListFragment : Fragment(R.layout.fragment_coin_list) {
         binding.swlCoinList.setColorSchemeColors(requireContext().getColor(R.color.black_77))
         configureRecyclerView()
         setupViewsListener()
-        installObservers()
+        installObserver()
     }
 
     private fun configureRecyclerView() {
@@ -69,7 +69,7 @@ class CoinListFragment : Fragment(R.layout.fragment_coin_list) {
         }
     }
 
-    private fun installObservers() {
+    private fun installObserver() {
         viewModel.coinListStateFlow.observe(viewLifecycleOwner) {
             when (it) {
                 is CoinListState.Loading -> {
