@@ -38,11 +38,11 @@ moshi = "1.14.0"
 ## ImageLoader
 picasso = "2.71828"
 glide = "4.13.2"
-coil = "2.2.1"
+coil = "2.2.2"
 ## DI
 dagger2 = "2.38.1"
 hilt = "2.42"
-koin = "3.2.2"
+koin = "3.2.3"
 ## Logs
 timber = "5.0.1"
 ## Test
